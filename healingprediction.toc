@@ -1,0 +1,6 @@
+## Interface: 80000
+## Title: HealingPrediction
+## Author: Complex
+## Version: v1.0
+
+main.lua
