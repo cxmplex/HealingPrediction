@@ -70,5 +70,3 @@ end
 
 SLASH_HPE1 = "/hpe"
 SlashCmdList["HPE"] = HPEAddonCommands
-
-
