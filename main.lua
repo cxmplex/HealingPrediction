@@ -5,7 +5,7 @@ f:RegisterEvent("PLAYER_REGEN_DISABLED")
 f:RegisterEvent("PLAYER_REGEN_ENABLED")
 
 local disabled
-last_command_received = ""
+local last_command_received
 
 local function getHealPower()
     local heal_power = GetSpellBonusDamage(7)
@@ -48,14 +48,16 @@ f:SetScript("OnEvent", function(self, event)
         end
     end
     --verify spell is not on cd
-    local _, duration, _, _ = GetSpellCooldown(115310, "spell")
-    if disabled == 0 and duration == 0 then
-        local total_heal = calculateMaxHeal()
-        print("Revival can be cast for " .. total_heal)
+    if UnitInRaid("player") then
+        local _, duration, _, _ = GetSpellCooldown(115310, "spell")
+        if disabled == 0 and duration == 0 then
+            local total_heal = calculateMaxHeal()
+            print("Revival can be cast for " .. total_heal)
+        end
     end
 end)
 
-function HPEAddonCommands(msg, _)
+local function HPEAddonCommands(msg, _)
     local _, _, cmd, _ = string.find(msg, "%s?(%w+)%s?(.*)")
     if cmd == "e" then
         disabled = 0
